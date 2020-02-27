@@ -30,7 +30,7 @@ namespace DigitalDiary.Controllers
         {
             m.UserId = (int)Session["UserId"];
             DateTime date = DateTime.Now;
-            string mdate = date.ToLongDateString() + date.ToLongTimeString();
+            string mdate = date.ToLongDateString() + Environment.NewLine + date.ToLongTimeString();
             m.LastModificationDate = mdate;
         }
 
