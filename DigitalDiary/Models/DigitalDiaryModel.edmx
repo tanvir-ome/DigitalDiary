@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DigitalDiaryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Importances">
+          <Key>
+            <PropertyRef Name="ImportanceId" />
+          </Key>
+          <Property Name="ImportanceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImportanceClassifier" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Memories">
+          <Key>
+            <PropertyRef Name="MemoryId" />
+          </Key>
+          <Property Name="MemoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Experience" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="Thoughts" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="Feelings" Type="varchar" MaxLength="256" />
+          <Property Name="Comments" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="MemoryDate" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ImagePath" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="LastModificationDate" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ImportanceId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Memories_Importances">
+          <End Role="Importances" Type="Self.Importances" Multiplicity="1" />
+          <End Role="Memories" Type="Self.Memories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Importances">
+              <PropertyRef Name="ImportanceId" />
+            </Principal>
+            <Dependent Role="Memories">
+              <PropertyRef Name="ImportanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Memories_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Memories" Type="Self.Memories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Memories">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DigitalDiaryModelStoreContainer">
+          <EntitySet Name="Importances" EntityType="Self.Importances" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Memories" EntityType="Self.Memories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Memories_Importances" Association="Self.FK_Memories_Importances">
+            <End Role="Importances" EntitySet="Importances" />
+            <End Role="Memories" EntitySet="Memories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Memories_Users" Association="Self.FK_Memories_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Memories" EntitySet="Memories" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DigitalDiaryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Importance">
+          <Key>
+            <PropertyRef Name="ImportanceId" />
+          </Key>
+          <Property Name="ImportanceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImportanceClassifier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Memories" Relationship="Self.FK_Memories_Importances" FromRole="Importances" ToRole="Memories" />
+        </EntityType>
+        <EntityType Name="Memory">
+          <Key>
+            <PropertyRef Name="MemoryId" />
+          </Key>
+          <Property Name="MemoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Experience" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Thoughts" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Feelings" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Comments" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MemoryDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ImagePath" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastModificationDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ImportanceId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Importance" Relationship="Self.FK_Memories_Importances" FromRole="Memories" ToRole="Importances" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Memories_Users" FromRole="Memories" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Memories" Relationship="Self.FK_Memories_Users" FromRole="Users" ToRole="Memories" />
+        </EntityType>
+        <Association Name="FK_Memories_Importances">
+          <End Role="Importances" Type="Self.Importance" Multiplicity="1" />
+          <End Role="Memories" Type="Self.Memory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Importances">
+              <PropertyRef Name="ImportanceId" />
+            </Principal>
+            <Dependent Role="Memories">
+              <PropertyRef Name="ImportanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Memories_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Memories" Type="Self.Memory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Memories">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DigitalDiaryDataContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Importances" EntityType="Self.Importance" />
+          <EntitySet Name="Memories" EntityType="Self.Memory" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Memories_Importances" Association="Self.FK_Memories_Importances">
+            <End Role="Importances" EntitySet="Importances" />
+            <End Role="Memories" EntitySet="Memories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Memories_Users" Association="Self.FK_Memories_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Memories" EntitySet="Memories" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DigitalDiaryModelStoreContainer" CdmEntityContainer="DigitalDiaryDataContext">
+          <EntitySetMapping Name="Importances">
+            <EntityTypeMapping TypeName="DigitalDiaryModel.Importance">
+              <MappingFragment StoreEntitySet="Importances">
+                <ScalarProperty Name="ImportanceId" ColumnName="ImportanceId" />
+                <ScalarProperty Name="ImportanceClassifier" ColumnName="ImportanceClassifier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Memories">
+            <EntityTypeMapping TypeName="DigitalDiaryModel.Memory">
+              <MappingFragment StoreEntitySet="Memories">
+                <ScalarProperty Name="MemoryId" ColumnName="MemoryId" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+                <ScalarProperty Name="Thoughts" ColumnName="Thoughts" />
+                <ScalarProperty Name="Feelings" ColumnName="Feelings" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="MemoryDate" ColumnName="MemoryDate" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="LastModificationDate" ColumnName="LastModificationDate" />
+                <ScalarProperty Name="ImportanceId" ColumnName="ImportanceId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="DigitalDiaryModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

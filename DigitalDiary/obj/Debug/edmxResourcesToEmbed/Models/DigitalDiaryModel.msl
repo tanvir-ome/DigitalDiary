@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DigitalDiaryModelStoreContainer" CdmEntityContainer="DigitalDiaryDataContext">
+    <EntitySetMapping Name="Importances">
+      <EntityTypeMapping TypeName="DigitalDiaryModel.Importance">
+        <MappingFragment StoreEntitySet="Importances">
+          <ScalarProperty Name="ImportanceId" ColumnName="ImportanceId" />
+          <ScalarProperty Name="ImportanceClassifier" ColumnName="ImportanceClassifier" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Memories">
+      <EntityTypeMapping TypeName="DigitalDiaryModel.Memory">
+        <MappingFragment StoreEntitySet="Memories">
+          <ScalarProperty Name="MemoryId" ColumnName="MemoryId" />
+          <ScalarProperty Name="Experience" ColumnName="Experience" />
+          <ScalarProperty Name="Thoughts" ColumnName="Thoughts" />
+          <ScalarProperty Name="Feelings" ColumnName="Feelings" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="MemoryDate" ColumnName="MemoryDate" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="LastModificationDate" ColumnName="LastModificationDate" />
+          <ScalarProperty Name="ImportanceId" ColumnName="ImportanceId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="DigitalDiaryModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

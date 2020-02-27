@@ -1,0 +1,97 @@
+﻿@model IEnumerable<DigitalDiary.Models.Memory>
+
+@{
+    Layout = null;
+    if(Session["UserId"] == null)
+    {
+        Response.Redirect("~/LogIn/Index");
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Experience)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Thoughts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Feelings)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comments)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemoryDate)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.LastModificationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Importance.ImportanceClassifier)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.User.Username)
+            </th>*@
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Experience)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Thoughts)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Feelings)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comments)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemoryDate)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.ImagePath)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.LastModificationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Importance.ImportanceClassifier)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.User.Username)
+            </td>*@
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.MemoryId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.MemoryId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.MemoryId })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

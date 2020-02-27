@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DigitalDiaryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Importance">
+    <Key>
+      <PropertyRef Name="ImportanceId" />
+    </Key>
+    <Property Name="ImportanceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ImportanceClassifier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Memories" Relationship="Self.FK_Memories_Importances" FromRole="Importances" ToRole="Memories" />
+  </EntityType>
+  <EntityType Name="Memory">
+    <Key>
+      <PropertyRef Name="MemoryId" />
+    </Key>
+    <Property Name="MemoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Experience" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Thoughts" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Feelings" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="Comments" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MemoryDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ImagePath" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastModificationDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ImportanceId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Importance" Relationship="Self.FK_Memories_Importances" FromRole="Memories" ToRole="Importances" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Memories_Users" FromRole="Memories" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Memories" Relationship="Self.FK_Memories_Users" FromRole="Users" ToRole="Memories" />
+  </EntityType>
+  <Association Name="FK_Memories_Importances">
+    <End Role="Importances" Type="Self.Importance" Multiplicity="1" />
+    <End Role="Memories" Type="Self.Memory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Importances">
+        <PropertyRef Name="ImportanceId" />
+      </Principal>
+      <Dependent Role="Memories">
+        <PropertyRef Name="ImportanceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Memories_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Memories" Type="Self.Memory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Memories">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DigitalDiaryDataContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Importances" EntityType="Self.Importance" />
+    <EntitySet Name="Memories" EntityType="Self.Memory" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Memories_Importances" Association="Self.FK_Memories_Importances">
+      <End Role="Importances" EntitySet="Importances" />
+      <End Role="Memories" EntitySet="Memories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Memories_Users" Association="Self.FK_Memories_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Memories" EntitySet="Memories" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

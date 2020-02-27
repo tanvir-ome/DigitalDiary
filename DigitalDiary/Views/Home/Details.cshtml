@@ -1,0 +1,106 @@
+﻿@model DigitalDiary.Models.Memory
+
+@{
+    Layout = null;
+    if(Session["UserId"] == null)
+    {
+        Response.Redirect("~/LogIn/Index");
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Memory</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Experience)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Experience)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Thoughts)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Thoughts)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Feelings)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Feelings)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Comments)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Comments)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.MemoryDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.MemoryDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ImagePath)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.LastModificationDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.LastModificationDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Importance.ImportanceClassifier)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Importance.ImportanceClassifier)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.User.Username)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.User.Username)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.MemoryId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
