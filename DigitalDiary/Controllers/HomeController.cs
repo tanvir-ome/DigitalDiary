@@ -15,6 +15,25 @@ namespace DigitalDiary.Controllers
         IRepository<Memory> repo = new MemoryRepository();
         IMemoryRepository MRepo = new MemoryRepository();
 
+        void SavePhoto(Memory m)
+        {
+            string FileName = Path.GetFileNameWithoutExtension(m.ImageFile.FileName);
+            string extension = Path.GetExtension(m.ImageFile.FileName);
+            FileName = FileName + DateTime.Now.ToString("yymmssfff") + extension;
+            m.ImagePath = "~/Images/" + FileName;
+            FileName = Path.Combine(Server.MapPath("~/Images/"), FileName);
+            m.ImageFile.SaveAs(FileName);
+            ModelState.Clear();
+        }
+
+        void ModifyDate(Memory m)
+        {
+            m.UserId = (int)Session["UserId"];
+            DateTime date = DateTime.Now;
+            string mdate = date.ToLongDateString() + date.ToLongTimeString();
+            m.LastModificationDate = mdate;
+        }
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -42,16 +61,20 @@ namespace DigitalDiary.Controllers
         [HttpPost]
         public ActionResult Create(Memory m)
         {
-            m.UserId = (int)Session["UserId"];
-            string FileName = Path.GetFileNameWithoutExtension(m.ImageFile.FileName);
-            string extension = Path.GetExtension(m.ImageFile.FileName);
-            FileName = FileName + DateTime.Now.ToString("yymmssfff") + extension;
-            m.ImagePath = "~/Images/" + FileName;
-            FileName = Path.Combine(Server.MapPath("~/Images/"), FileName);
-            m.ImageFile.SaveAs(FileName);
-            ModelState.Clear();
-            DateTime date = DateTime.Now;
-            m.LastModificationDate = date.ToLongTimeString();
+            //m.UserId = (int)Session["UserId"];
+            //string FileName = Path.GetFileNameWithoutExtension(m.ImageFile.FileName);
+            //string extension = Path.GetExtension(m.ImageFile.FileName);
+            //FileName = FileName + DateTime.Now.ToString("yymmssfff") + extension;
+            //m.ImagePath = "~/Images/" + FileName;
+            //FileName = Path.Combine(Server.MapPath("~/Images/"), FileName);
+            //m.ImageFile.SaveAs(FileName);
+            //ModelState.Clear();
+            SavePhoto(m);
+            ModifyDate(m);
+            //DateTime date = DateTime.Now;
+            //m.LastModificationDate = date.ToLongTimeString();
+            //string mdate = date.ToLongDateString() + date.ToLongTimeString();
+            //m.LastModificationDate = mdate;
 
             repo.Insert(m);
             return RedirectToAction("Details", new { id = m.MemoryId });
@@ -69,7 +92,7 @@ namespace DigitalDiary.Controllers
                 }
                 memoryModel.ImportanceClassifierCollection = db.Importances.ToList<Importance>();
             }
-            memoryModel = repo.Get(id);
+            //memoryModel = repo.Get(id);
             return View(memoryModel);
             //return View(repo.Get(id));
         }
@@ -77,10 +100,12 @@ namespace DigitalDiary.Controllers
         [HttpPost]
         public ActionResult Edit(Memory m)
         {
-            m.UserId = (int)Session["UserId"];
-            DateTime date = DateTime.Now;
-            string mdate = date.ToLongDateString() + date.ToLongTimeString();
-            m.LastModificationDate = mdate;
+            //m.UserId = (int)Session["UserId"];
+            //DateTime date = DateTime.Now;
+            //string mdate = date.ToLongDateString() + date.ToLongTimeString();
+            //m.LastModificationDate = mdate;
+            ModifyDate(m);
+            SavePhoto(m);
             repo.Update(m);
             return RedirectToAction("Details", new { id = m.MemoryId });
         }

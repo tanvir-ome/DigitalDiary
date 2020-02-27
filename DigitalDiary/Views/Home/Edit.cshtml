@@ -20,7 +20,7 @@
     <title>Edit</title>
 </head>
 <body>
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Edit", "Home", FormMethod.Post, new {enctype = "multipart/form-data"}))
     {
         @Html.AntiForgeryToken()
         
@@ -66,7 +66,7 @@
                 @Html.LabelFor(model => model.MemoryDate, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @*@Html.EditorFor(model => model.MemoryDate, new { htmlAttributes = new { @class = "form-control" } })*@
-                    <input type="date" name="MemoryDate" id="datepicker" class="form-control" />
+                    <input type="date" name="MemoryDate" id="datepicker" value="@Model.MemoryDate" class="form-control" />
                     @Html.ValidationMessageFor(model => model.MemoryDate, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -74,7 +74,9 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.ImagePath, new { htmlAttributes = new { @class = "form-control" } })
+                    <img src="@Url.Content(Model.ImagePath)" width="250" height="250" />
+                    <input type="file" name="ImageFile" value="@Model.ImagePath" required />
+                    @*@Html.EditorFor(model => model.ImagePath, new { htmlAttributes = new { @class = "form-control" } })*@
                     @Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -91,8 +93,8 @@
                 @Html.LabelFor(model => model.ImportanceId, "ImportanceId", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @*@Html.DropDownList("ImportanceId", null, htmlAttributes: new { @class = "form-control" })*@
-                    @*@Html.DropDownListFor(model => model.ImportanceId, new SelectList(Model.ImportanceClassifierCollection, "ImportanceId", "ImportanceClassifier"), "Select Importance of the Memory", htmlAttributes: new { @class = "form-control" })*@
-                    @Html.EditorFor(model => model.ImportanceId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownListFor(model => model.ImportanceId, new SelectList(Model.ImportanceClassifierCollection, "ImportanceId", "ImportanceClassifier"), "Select Importance of the Memory", htmlAttributes: new { @class = "form-control" })
+                    @*@Html.EditorFor(model => model.ImportanceId, new { htmlAttributes = new { @class = "form-control" } })*@
                     @Html.ValidationMessageFor(model => model.ImportanceId, "", new { @class = "text-danger" })
                 </div>
             </div>
