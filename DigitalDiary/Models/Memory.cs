@@ -11,19 +11,36 @@ namespace DigitalDiary.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Web;
 
     public partial class Memory
     {
         public int MemoryId { get; set; }
+
+        [DisplayName("Experience")]
         public string Experience { get; set; }
+
+        [DisplayName("Thoughts")]
         public string Thoughts { get; set; }
+
+        [DisplayName("Feelings")]
         public string Feelings { get; set; }
+
+        [DisplayName("Comments")]
         public string Comments { get; set; }
+
+        [DisplayName("Memory Date")]
         public string MemoryDate { get; set; }
+
+        [DisplayName("Images")]
         public string ImagePath { get; set; }
+
+        [DisplayName("Last Modified")]
         public string LastModificationDate { get; set; }
+
+        [DisplayName("Importance")]
         public int ImportanceId { get; set; }
         public int UserId { get; set; }
     

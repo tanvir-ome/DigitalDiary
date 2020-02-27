@@ -18,7 +18,8 @@ namespace DigitalDiary.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View(MRepo.GetUserMeoriesList((int)Session["UserId"]));
+            int id = (int)Session["UserId"];
+            return View(MRepo.GetUserMeoriesList(id));
         }
 
         [HttpGet]
@@ -78,7 +79,8 @@ namespace DigitalDiary.Controllers
         {
             m.UserId = (int)Session["UserId"];
             DateTime date = DateTime.Now;
-            m.LastModificationDate = date.ToLongTimeString();
+            string mdate = date.ToLongDateString() + date.ToLongTimeString();
+            m.LastModificationDate = mdate;
             repo.Update(m);
             return RedirectToAction("Details", new { id = m.MemoryId });
         }

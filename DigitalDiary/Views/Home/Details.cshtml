@@ -25,77 +25,78 @@
         <hr />
         <dl class="dl-horizontal">
             <dt>
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </dt>
+
+            <dd>
+                @*@Html.DisplayFor(model => model.ImagePath)*@
+                <img src="@Url.Content(Model.ImagePath)" width="250" height="250" />
+            </dd>
+
+            <dt>
                 @Html.DisplayNameFor(model => model.Experience)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Experience)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.Thoughts)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Thoughts)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.Feelings)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Feelings)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.Comments)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Comments)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.MemoryDate)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.MemoryDate)
             </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.ImagePath)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.ImagePath)
-            </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.LastModificationDate)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.LastModificationDate)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.Importance.ImportanceClassifier)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Importance.ImportanceClassifier)
             </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.User.Username)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.User.Username)
-            </dd>
-    
+
+            @*<dt>
+            @Html.DisplayNameFor(model => model.User.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Username)
+        </dd>*@
+
         </dl>
     </div>
     <p>

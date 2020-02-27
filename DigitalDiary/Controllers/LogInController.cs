@@ -33,5 +33,11 @@ namespace DigitalDiary.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            return RedirectToAction("Index", "LogIn");
+        }
     }
 }
