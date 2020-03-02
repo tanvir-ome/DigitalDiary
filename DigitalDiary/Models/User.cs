@@ -11,7 +11,8 @@ namespace DigitalDiary.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,6 +25,8 @@ namespace DigitalDiary.Models
         public string Username { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
+
+        [DataType(DataType.Password)]
         public string Password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
