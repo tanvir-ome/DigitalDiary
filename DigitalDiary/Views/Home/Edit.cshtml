@@ -76,8 +76,8 @@
                 <div class="col-md-10">
                     <img src="@Url.Content(Model.ImagePath)" width="250" height="250" />
                     <input type="file" name="ImageFile" value="@Model.ImagePath" required />
-                    @*@Html.EditorFor(model => model.ImagePath, new { htmlAttributes = new { @class = "form-control" } })*@
                     @Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })
+                    @*@Html.EditorFor(model => model.ImagePath, new { htmlAttributes = new { @class = "form-control" } })*@
                 </div>
             </div>
     

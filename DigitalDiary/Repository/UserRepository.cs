@@ -13,7 +13,7 @@ namespace DigitalDiary.Repository
         {
             using (DigitalDiaryDataContext db = new DigitalDiaryDataContext())
             {
-                var LogInDetails = db.Users.Where(x => x.Username == username && x.Password == password).FirstOrDefault();
+                var LogInDetails = db.Users.Where(x => x.Username == username && x.Password == password).SingleOrDefault();
                 return LogInDetails;
                 //if(LogInDetails == null)
                 //{
